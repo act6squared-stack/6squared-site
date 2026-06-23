@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>6 Squared | ACT Tutoring</title>
+<meta name="description" content="6 Squared ACT tutoring. One-on-one and small-group online prep. Every student starts with a free 30-minute consultation." />
+
+<!-- ============================================================= -->
+<!--  EDIT ME: two links you'll want to set                         -->
+<!--  1. CONSULTATION_LINK is already set to your Google Form.       -->
+<!--  2. STRIPE_LINK is empty. Paste your Stripe payment link        -->
+<!--     between the quotes below once you have it, and the           -->
+<!--     "Add payment method" button will turn on automatically.      -->
+<!-- ============================================================= -->
+<script>
+  const CONSULTATION_LINK = "https://forms.gle/fKizoKdfryWkRxuV7";
+  const STRIPE_LINK = "https://buy.stripe.com/6oUcN70JEd4kgXfbGO0kE01"; // <-- PASTE YOUR STRIPE LINK HERE (keep the quotes)
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --ink:#16181d;
+    --ink-soft:#3a3d44;
+    --paper:#fbf7ee;
+    --paper-2:#f4eede;
+    --line:#e3dcc9;
+    --accent:#0e6b4a;
+    --accent-deep:#0a4e36;
+    --accent-soft:#e2efe7;
+    --gold:#b9831f;
+    --gold-soft:#f7ecd2;
+    --muted:#6e6c61;
+    --radius:14px;
+    --maxw:1120px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Hanken Grotesk",system-ui,sans-serif;
+    color:var(--ink);
+    background-color:var(--paper);
+    background-image:
+      linear-gradient(rgba(14,107,74,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14,107,74,.045) 1px, transparent 1px);
+    background-size:26px 26px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:600;line-height:1.1;margin:0;letter-spacing:-.01em;}
+  p{margin:0 0 1em;}
+  a{color:inherit;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(8px);
+    background:rgba(251,247,238,.82);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;}
+  .logo{font-family:"Fraunces",serif;font-weight:700;font-size:1.45rem;letter-spacing:-.02em;display:flex;align-items:baseline;gap:.1em;text-decoration:none;}
+  .logo b{font-weight:700;}
+  .logo small{font-family:"Hanken Grotesk";font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-left:.5rem;font-weight:600;align-self:center;}
+  .logo .brand-sq{color:var(--accent);}
+  .nav-links{display:flex;align-items:center;gap:28px;}
+  .nav-links a{text-decoration:none;font-size:.93rem;font-weight:500;color:var(--ink-soft);transition:color .15s;}
+  .nav-links a:hover{color:var(--accent);}
+  .btn{
+    display:inline-block;text-decoration:none;font-weight:600;font-size:.93rem;
+    padding:11px 20px;border-radius:999px;border:1.5px solid var(--accent);
+    background:var(--accent);color:#fff;transition:transform .12s ease, background .15s;
+    cursor:pointer;
+  }
+  .btn:hover{background:var(--accent-deep);border-color:var(--accent-deep);transform:translateY(-1px);}
+  .btn.ghost{background:transparent;color:var(--accent);}
+  .btn.ghost:hover{background:var(--accent-soft);color:var(--accent-deep);}
+  .btn.gold{background:var(--gold);border-color:var(--gold);}
+  .btn.gold:hover{background:#9c6d16;border-color:#9c6d16;}
+  .btn.disabled{background:var(--paper-2);border-color:var(--line);color:var(--muted);cursor:not-allowed;pointer-events:none;}
+  .menu-toggle{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--ink);}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:84px 0 70px;position:relative;overflow:hidden;}
+  .hero-inner{max-width:760px;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-soft);padding:6px 14px;border-radius:999px;margin-bottom:24px;}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.4rem);margin-bottom:22px;}
+  .hero h1 em{font-style:italic;color:var(--accent);}
+  .hero-sub{font-size:1.15rem;color:var(--ink-soft);max-width:50ch;margin-bottom:30px;}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
+  .hero-note{font-size:.9rem;color:var(--muted);margin-top:20px;}
+  .hero-note b{color:var(--gold);}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:66px 0;}
+  .section-head{margin-bottom:40px;max-width:62ch;}
+  .section-head .kicker{font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .section-head h2{font-size:clamp(1.9rem,3.6vw,2.6rem);margin-bottom:14px;}
+  .section-head p{font-size:1.05rem;color:var(--ink-soft);}
+
+  /* ABOUT */
+  .about{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+  .badges{display:flex;flex-wrap:wrap;gap:14px;}
+  .badge{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px 20px;flex:1;min-width:150px;}
+  .badge .n{font-family:"Fraunces",serif;font-weight:700;font-size:2rem;color:var(--accent);line-height:1;}
+  .badge .l{font-size:.86rem;color:var(--muted);margin-top:6px;}
+
+  /* STEPS */
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
+  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 20px;position:relative;}
+  .step .num{font-family:"Fraunces",serif;font-weight:700;color:var(--accent);font-size:1.1rem;border:1.5px solid var(--accent-soft);background:var(--accent-soft);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+  .step h3{font-size:1.05rem;margin-bottom:8px;}
+  .step p{font-size:.9rem;color:var(--ink-soft);margin:0;}
+  .step.highlight{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);}
+
+  /* INCLUDED */
+  .incl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;}
+  .incl{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;}
+  .incl .check{flex:none;width:26px;height:26px;border-radius:50%;background:var(--accent-soft);color:var(--accent-deep);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95rem;}
+  .incl p{margin:0;font-size:.96rem;}
+
+  /* FOUNDING BANNER */
+  .founding-banner{background:linear-gradient(100deg,var(--gold-soft),#fdf6e6);border:1.5px solid var(--gold);border-radius:18px;padding:26px 30px;}
+  .founding-banner .t{font-family:"Fraunces",serif;font-weight:700;font-size:1.4rem;color:var(--gold);}
+  .founding-banner .d{font-size:.96rem;color:var(--ink-soft);max-width:70ch;margin:0;}
+  .founding-tag{display:inline-block;background:var(--gold);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:8px;}
+
+  /* RATES TABLE */
+  .rates-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .rate-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+  .rate-card.founding{border:1.5px solid var(--gold);box-shadow:0 0 0 3px var(--gold-soft);}
+  .rate-card .rc-head{padding:18px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;}
+  .rate-card .rc-head h3{font-size:1.2rem;}
+  .rate-card .rc-head .tag{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;}
+  .tag.gold{background:var(--gold);color:#fff;}
+  .tag.plain{background:var(--paper-2);color:var(--muted);}
+  .rate-row{padding:18px 24px;border-bottom:1px solid var(--line);}
+  .rate-row:last-child{border-bottom:none;}
+  .rate-row .rr-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;}
+  .rate-row .name{font-weight:700;font-size:1.05rem;}
+  .rate-row .price{font-family:"Fraunces",serif;font-weight:700;font-size:1.3rem;color:var(--accent);white-space:nowrap;}
+  .rate-row .price small{font-size:.7rem;color:var(--muted);font-family:"Hanken Grotesk";font-weight:600;}
+  .rate-row .meta{font-size:.9rem;color:var(--muted);margin-top:4px;}
+
+  /* PACKAGES */
+  .pkg-label{font-family:"Fraunces",serif;font-weight:600;font-size:1.35rem;display:flex;align-items:center;gap:12px;margin:0 0 18px;}
+  .pkg-label .pill{font-family:"Hanken Grotesk";font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:999px;}
+  .pill.gold{background:var(--gold);color:#fff;}
+  .pill.plain{background:var(--paper-2);color:var(--muted);}
+  .pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .pkg{background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px;display:flex;flex-direction:column;position:relative;transition:transform .15s, box-shadow .15s;}
+  .pkg:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(14,107,74,.12);}
+  .pkg.founding{border:1.5px solid var(--gold);box-shadow:0 0 0 3px var(--gold-soft);}
+  .pkg h3{font-size:1.45rem;margin-bottom:4px;}
+  .pkg .dur{font-size:.9rem;color:var(--muted);margin-bottom:18px;}
+  .pkg .price{font-family:"Fraunces",serif;font-weight:700;font-size:2.1rem;line-height:1;}
+  .pkg.founding .price{color:var(--gold);}
+  .pkg.standard .price{color:var(--ink);}
+  .pkg .price span{font-size:1rem;color:var(--ink-soft);font-family:"Hanken Grotesk";font-weight:700;}
+  .pkg .group-price{font-size:1.1rem;font-weight:700;color:var(--ink-soft);margin-top:6px;}
+  .pkg .group-price .lt{font-weight:400;}
+  .pkg .save{display:inline-block;background:var(--accent-soft);color:var(--accent-deep);font-weight:700;font-size:.82rem;padding:4px 12px;border-radius:999px;margin:14px 0;}
+  .pkg.founding .save{background:var(--gold-soft);color:var(--gold);}
+  .pkg .best{font-size:.9rem;color:var(--ink-soft);}
+
+  /* STANDARD packages slightly recessed */
+  .pkg.standard{background:#fcfaf4;}
+
+  /* PAYMENT */
+  .pay{background:var(--ink);color:#f3efe4;border-radius:22px;padding:48px 44px;display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:center;}
+  .pay .kicker{font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7fd3ad;margin-bottom:12px;}
+  .pay h2{color:#fff;font-size:2rem;margin-bottom:14px;}
+  .pay p{color:#cfcabb;}
+  .pay .pay-actions{display:flex;flex-direction:column;gap:12px;}
+  .pay .btn{text-align:center;}
+  .pay .note{font-size:.82rem;color:#9b968a;margin-top:4px;}
+  .pay .step1{font-size:.9rem;color:#cfcabb;border-left:2px solid var(--accent);padding-left:14px;}
+
+  /* POLICIES */
+  .policies{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .pol-list{display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;list-style:none;padding:0;margin:0;}
+  .pol-list li{display:flex;gap:12px;font-size:.98rem;color:var(--ink-soft);}
+  .pol-list li::before{content:"\00a7";color:var(--accent);font-weight:700;flex:none;}
+
+  /* READY / CTA BLOCK */
+  .ready{text-align:center;padding:84px 0;}
+  .ready h2{font-size:clamp(2rem,4.5vw,3rem);margin-bottom:18px;}
+  .ready p{font-size:1.1rem;color:var(--ink-soft);max-width:48ch;margin:0 auto 28px;}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:#cfcabb;padding:46px 0 30px;}
+  .foot-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:center;}
+  .foot-inner .logo{color:#fff;}
+  .foot-inner .logo .brand-sq{color:#7fd3ad;}
+  .foot-inner .logo small{color:#9b968a;}
+  .foot-contact{font-size:.9rem;display:flex;flex-wrap:wrap;gap:8px 22px;}
+  .foot-contact a{color:#cfcabb;text-decoration:none;}
+  .foot-contact a:hover{color:#fff;}
+  .foot-bottom{margin-top:24px;padding-top:18px;border-top:1px solid #2b2d34;font-size:.82rem;color:#85806f;}
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:900px){
+    .about-grid{grid-template-columns:1fr;gap:28px;}
+    .steps{grid-template-columns:1fr 1fr;}
+    .rates-grid{grid-template-columns:1fr;}
+    .pkg-grid{grid-template-columns:1fr;}
+    .pay{grid-template-columns:1fr;padding:34px 26px;}
+    .pol-list{grid-template-columns:1fr;}
+    .nav-links{position:fixed;inset:68px 0 auto 0;flex-direction:column;background:var(--paper);border-bottom:1px solid var(--line);padding:18px 24px;gap:18px;display:none;}
+    .nav-links.open{display:flex;}
+    .nav-links a{font-size:1.05rem;}
+    .menu-toggle{display:block;}
+  }
+  @media(max-width:520px){
+    .steps{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo"><b>6</b>&nbsp;<span class="brand-sq">Squared</span> <small>ACT Prep</small></a>
+    <button class="menu-toggle" aria-label="Menu" onclick="document.getElementById('navlinks').classList.toggle('open')">&#9776;</button>
+    <nav class="nav-links" id="navlinks">
+      <a href="#how">How it works</a>
+      <a href="#rates">Rates</a>
+      <a href="#packages">Packages</a>
+      <a href="#pay">Payment</a>
+      <a class="btn" id="nav-cta" href="#">Free consultation</a>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner reveal">
+      <span class="eyebrow">&#9679; Online ACT tutoring</span>
+      <h1>Find the points <em>you've been leaving</em> on the table.</h1>
+      <p class="hero-sub">One-on-one and small-group ACT prep. Every student starts with a free 30-minute consultation, no commitment.</p>
+      <div class="hero-cta">
+        <a class="btn" id="hero-cta" href="#">Book your free consultation</a>
+        <a class="btn ghost" href="#packages">See pricing</a>
+      </div>
+      <p class="hero-note"><b>Founding rates are live.</b> New tutoring means lower prices, for a limited time through July 15, 2026.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <div class="section-head" style="margin-bottom:18px;">
+        <div class="kicker">About your tutor</div>
+        <h2>Hey! I'm Noah.</h2>
+      </div>
+      <p>I want to get you your highest ACT score. After achieving a 36 on all four ACT sections, I found the tricks, tips, and topics you need to know to score high on the ACT.</p>
+      <p>I work with motivated students who are serious about improving and achieving their dream score, and I hope students are willing to work hard towards that goal. All sessions are online over Google Meet, so we can work together from anywhere.</p>
+    </div>
+    <div class="reveal">
+      <div class="badges">
+        <div class="badge">
+          <div class="n">36</div>
+          <div class="l">Perfect score on all four ACT sections: Math, English, Reading, and Science</div>
+        </div>
+        <div class="badge">
+          <div class="n">4+ yrs</div>
+          <div class="l">Tutoring experience helping students prepare</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section id="how">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">How it works</div>
+      <h2>It starts with a free conversation.</h2>
+      <p>Before any tutoring begins, we meet for a free 30-minute consultation. It's the first step for every student, and a chance to make sure we're the right fit before anything else.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step highlight">
+        <div class="num">1</div>
+        <h3>Free consultation</h3>
+        <p>30 minutes to talk through your current score, target score, timeline, and schedule. No commitment.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Diagnostic test</h3>
+        <p>You take a real ACT practice test. We review it together to see exactly where your points are going.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Personalized sessions</h3>
+        <p>We attack your weakest areas first, building strategies section by section with timed practice throughout.</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <h3>Track progress</h3>
+        <p>Check-ins after every two sessions so we always know you're improving.</p>
+      </div>
+      <div class="step">
+        <div class="num">5</div>
+        <h3>Take the ACT</h3>
+        <p>You walk in prepared, confident, and ready. Good luck!</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:34px;" class="reveal">
+      <a class="btn" id="how-cta" href="#">Start with a free consultation</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHAT YOU GET ================= -->
+<section style="padding-top:10px;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">What you get</div>
+      <h2>What our sessions look like.</h2>
+    </div>
+    <div class="incl-grid reveal">
+      <div class="incl"><span class="check">&#10003;</span><p>A diagnostic practice test and score breakdown before your first session.</p></div>
+      <div class="incl"><span class="check">&#10003;</span><p>A personalized study plan targeting your weakest point categories.</p></div>
+      <div class="incl"><span class="check">&#10003;</span><p>Section-specific strategy guides for Math, English, Reading, and Science tailored for you.</p></div>
+      <div class="incl"><span class="check">&#10003;</span><p>Access to curated practice materials between sessions.</p></div>
+      <div class="incl"><span class="check">&#10003;</span><p>A progress check-in report after every two sessions.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOUNDING BANNER + RATES ================= -->
+<section id="rates" style="padding-top:10px;">
+  <div class="wrap">
+    <div class="founding-banner reveal">
+      <span class="founding-tag">Limited time</span>
+      <div class="t">Founding rates</div>
+      <p class="d">Because 6 Squared just opened its doors, hourly rates and packages are heavily discounted for a limited window. Founding rates are limited and end July 15, 2026. Lock them in before then.</p>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:48px;">
+      <div class="kicker">Hourly rates</div>
+      <h2>Simple, online, by the hour.</h2>
+    </div>
+
+    <div class="rates-grid reveal">
+      <!-- Founding -->
+      <div class="rate-card founding">
+        <div class="rc-head">
+          <h3>Founding rates</h3>
+          <span class="tag gold">Through July 15, 2026</span>
+        </div>
+        <div class="rate-row">
+          <div class="rr-top">
+            <span class="name">1-on-1</span>
+            <span class="price">$40<small>/hr</small></span>
+          </div>
+          <div class="meta">1 student &middot; Google Meet &middot; best when you need specific concepts and a plan built around you.</div>
+        </div>
+        <div class="rate-row">
+          <div class="rr-top">
+            <span class="name">Group</span>
+            <span class="price">$20<small>/hr &middot; per student</small></span>
+          </div>
+          <div class="meta">2 to 6 students &middot; Google Meet &middot; best for general improvement across every section.</div>
+        </div>
+      </div>
+      <!-- Standard -->
+      <div class="rate-card">
+        <div class="rc-head">
+          <h3>Standard rates</h3>
+          <span class="tag plain">After July 15, 2026</span>
+        </div>
+        <div class="rate-row">
+          <div class="rr-top">
+            <span class="name">1-on-1</span>
+            <span class="price">$60<small>/hr</small></span>
+          </div>
+          <div class="meta">1 student &middot; Google Meet &middot; personalized, concept-focused sessions.</div>
+        </div>
+        <div class="rate-row">
+          <div class="rr-top">
+            <span class="name">Group</span>
+            <span class="price">$40<small>/hr &middot; per student</small></span>
+          </div>
+          <div class="meta">2 to 6 students &middot; Google Meet &middot; steady, all-around improvement.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PACKAGES ================= -->
+<section id="packages" style="padding-top:10px;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">Packages</div>
+      <h2>Go further for less with a package.</h2>
+      <p>I recommend more than one session so I can really get to know how you work, personalize your plan, and raise your score. Packages save you money, and if hourly rates rise later, the package price you paid won't.</p>
+    </div>
+
+    <!-- FOUNDING PACKAGES -->
+    <div class="reveal">
+      <div class="pkg-label">Founding packages <span class="pill gold">Through July 15, 2026</span></div>
+      <div class="pkg-grid" style="margin-bottom:44px;">
+        <div class="pkg founding">
+          <h3>Starter Pack</h3>
+          <div class="dur">4 sessions &middot; 4 weeks</div>
+          <div class="price">$159 <span>1-on-1</span></div>
+          <div class="group-price"><span class="lt">or</span> $79 per person (group)</div>
+          <div class="save">Save up to $81</div>
+          <div class="best">Best for students ~1 month from their test date or want to see how things work.</div>
+        </div>
+        <div class="pkg founding">
+          <h3>Deep Dive</h3>
+          <div class="dur">8 sessions &middot; 8 weeks</div>
+          <div class="price">$309 <span>1-on-1</span></div>
+          <div class="group-price"><span class="lt">or</span> $149 per person (group)</div>
+          <div class="save">Save up to $171</div>
+          <div class="best">Best for students with ~2 months to prepare.</div>
+        </div>
+        <div class="pkg founding">
+          <h3>Locked In</h3>
+          <div class="dur">12 sessions &middot; 12 weeks</div>
+          <div class="price">$459 <span>1-on-1</span></div>
+          <div class="group-price"><span class="lt">or</span> $219 per person (group)</div>
+          <div class="save">Save up to $261</div>
+          <div class="best">Best for students who are extremely serious and hard working with 3+ months to prepare.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STANDARD PACKAGES -->
+    <div class="reveal">
+      <div class="pkg-label">Standard packages <span class="pill plain">After July 15, 2026</span></div>
+      <div class="pkg-grid">
+        <div class="pkg standard">
+          <h3>Starter Pack</h3>
+          <div class="dur">4 sessions &middot; 4 weeks</div>
+          <div class="price">$230 <span>1-on-1</span></div>
+          <div class="group-price"><span class="lt">or</span> $150 per person (group)</div>
+          <div class="save">Save $10</div>
+          <div class="best">Best for students ~1 month from their test date or want to see how things work.</div>
+        </div>
+        <div class="pkg standard">
+          <h3>Deep Dive</h3>
+          <div class="dur">8 sessions &middot; 8 weeks</div>
+          <div class="price">$450 <span>1-on-1</span></div>
+          <div class="group-price"><span class="lt">or</span> $290 per person (group)</div>
+          <div class="save">Save $30</div>
+          <div class="best">Best for students with ~2 months to prepare.</div>
+        </div>
+        <div class="pkg standard">
+          <h3>Locked In</h3>
+          <div class="dur">12 sessions &middot; 12 weeks</div>
+          <div class="price">$620 <span>1-on-1</span></div>
+          <div class="group-price"><span class="lt">or</span> $380 per person (group)</div>
+          <div class="save">Save $100</div>
+          <div class="best">Best for students who are extremely serious and hard working with 3+ months to prepare.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= READY / CTA (above policies) ================= -->
+<section class="ready">
+  <div class="wrap reveal">
+    <h2>Ready to start?</h2>
+    <p>Start with a free 30-minute consultation. We'll talk through where you are, where you want to be, and how to get there.</p>
+    <a class="btn" id="ready-cta" href="#" style="font-size:1.05rem;padding:14px 28px;">Book your free consultation</a>
+  </div>
+</section>
+
+<!-- ================= POLICIES ================= -->
+<section class="policies" id="policies">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">Good to know</div>
+      <h2>Policies</h2>
+    </div>
+    <ul class="pol-list reveal">
+      <li>Cancellations must be made at least 24 hours in advance, or the session is forfeited.</li>
+      <li>Rescheduling is allowed with 24-hour notice at no penalty.</li>
+      <li>Packages are non-refundable once purchased. Individual sessions should be used at least once a week to keep your prep efficient.</li>
+      <li>Payment is due before each session when using individual session rates.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= PAYMENT (very bottom) ================= -->
+<section id="pay">
+  <div class="wrap">
+    <div class="pay reveal">
+      <div>
+        <div class="kicker">Payment</div>
+        <h2>Already had your consultation?</h2>
+        <p>Once we've met and chosen the right plan together, you can add a payment method and pay securely below. Payment is due before each session for hourly rates, and in full before the first session for packages.</p>
+        <p class="step1">New here? Every student starts with the free consultation first. Book that above, and we'll set up payment together afterward.</p>
+      </div>
+      <div class="pay-actions">
+        <a class="btn gold" id="pay-btn" href="#">Add payment method</a>
+        <span class="note" id="pay-note">Secure checkout via Stripe.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <a href="#top" class="logo"><b>6</b>&nbsp;<span class="brand-sq">Squared</span> <small>ACT Prep</small></a>
+      <div class="foot-contact">
+        <a href="mailto:act6squared@gmail.com">act6squared@gmail.com</a>
+      </div>
+    </div>
+    <div class="foot-bottom">Online tutoring via Google Meet</div>
+  </div>
+</footer>
+
+<script>
+  // Wire the consultation buttons to the Google Form
+  document.querySelectorAll('#nav-cta,#hero-cta,#how-cta,#ready-cta')
+    .forEach(function(el){ el.setAttribute('href', CONSULTATION_LINK); el.setAttribute('target','_blank'); el.setAttribute('rel','noopener'); });
+
+  // Wire the Stripe / payment button. Turns on automatically once STRIPE_LINK is set.
+  (function(){
+    var btn = document.getElementById('pay-btn');
+    var note = document.getElementById('pay-note');
+    if (STRIPE_LINK && STRIPE_LINK.trim() !== "") {
+      btn.setAttribute('href', STRIPE_LINK);
+      btn.setAttribute('target','_blank');
+      btn.setAttribute('rel','noopener');
+    } else {
+      btn.classList.add('disabled');
+      btn.textContent = 'Payment link coming soon';
+      note.textContent = 'A secure Stripe payment link will be added here.';
+    }
+  })();
+
+  // Close mobile menu on link tap
+  document.querySelectorAll('#navlinks a').forEach(function(a){
+    a.addEventListener('click', function(){ document.getElementById('navlinks').classList.remove('open'); });
+  });
+
+  // Scroll reveal
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+
+</body>
+</html>
